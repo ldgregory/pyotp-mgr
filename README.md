@@ -15,12 +15,12 @@ Functions provided:
 - Generate a Fernet encryption key for first time users
 - Optionally provide the Fernet Key as --key option, fernet.key file, or OS environment variable FERNETKEY
 - Save the TOTP record to a file as encrypted strings (default function)
-- Optionally save TOTP record to a SQLite DB instead the file as encrypted strings (--DB option)
+- Optionally save TOTP record to a SQLite DB instead of the file as encrypted strings (--db option)
 - Optionally save QR code to a .jpg output file (-o option)
-- Optionally display all stored TOTP records from a file or DB decrypted to the screen (--decrypt option)
+- Optionally display all stored TOTP records decrypted to the screen (--decrypt option)
 - Optionally generate and display a QR code for each TOTP record (--rebuild flag)
 - Optionally generate a looped test for validating an authenticator app TOTP code (-t flag)
-- Optionally display verbose output to copy and paste TOTP secretKey and TOTP URI (--verbose option)
+- Optionally display verbose output to copy and paste generated TOTP secretKey and TOTP URI (--verbose option)
 
 - Fernet Information: https://cryptography.io/en/latest/Fernet/
 
