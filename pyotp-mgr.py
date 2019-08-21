@@ -5,28 +5,27 @@ Leif Gregory <leif@devtek.org>
 totp.py v1.0
 Tested to Python v3.7.3
 
-Description:
-Generate and display QR codes for TOTP while also saving them in encrypted
-format to a file (default) or DB (optional). This application acts as a TOTP
-key manager similar to a password manager such as KeePass etc.
+## Description:
+Generate and display QR codes for TOTP while also saving them in encrypted format to a file (default) or DB (optional). This application acts as a TOTP key manager similar to a password manager such as KeePass etc. The rebuild function will generate QR codes for every stored TOTP code allowing you to quickly scan them one after the other with your mobile TOTP app.
 
-Functions provided:
+## Functions provided:
 - Generate TOTP Secret Key
 - Generate a QR code URI
 - Generate a QR code using the URI
 - Generate a Fernet encryption key for first time users
 - Optionally provide the Fernet Key as --key option, fernet.key file, or OS environment variable FERNETKEY
+- Optionaly enter a TOTP key in manually in cases where the key was generated somewhere else (-m option)
 - Save the TOTP record to a file as encrypted strings (default function)
-- Optionally save TOTP record to a SQLite DB instead the file as encrypted strings (--DB option)
+- Optionally save TOTP record to a SQLite DB instead of the file as encrypted strings (--db option)
 - Optionally save QR code to a .jpg output file (-o option)
-- Optionally display all stored TOTP records from a file or DB decrypted to the screen (--decrypt option)
+- Optionally display all stored TOTP records decrypted to the screen (--decrypt option)
 - Optionally generate and display a QR code for each TOTP record (--rebuild flag)
 - Optionally generate a looped test for validating an authenticator app TOTP code (-t flag)
-- Optionally display verbose output to copy and paste TOTP secretKey and TOTP URI (--verbose option)
+- Optionally display verbose output to copy and paste generated TOTP secretKey and TOTP URI (--verbose option)
 
 - Fernet Information: https://cryptography.io/en/latest/Fernet/
 
-Changelog:
+## Changelog:
 20190820 -  Added ability to set FERNETKEY as an OS environment variable.
 20190818 -  Added --rebuild feature and Fernet key generation as a file or with
             --key option, added DB functions for TOTP storage.
@@ -134,7 +133,9 @@ def fileRead(fernetKey, rebuild=None):
                 img = qrcode.make(x[2])
                 img.show()
             else:
-                print(f"\n{TextColor.GREEN}Account:\t{TextColor.RESET}{x[0]}\n{TextColor.GREEN}OTP Secret Key:\t{TextColor.RESET}{x[1]}\n{TextColor.GREEN}OTP QR URI:\t{TextColor.RESET}{x[2]}")
+                print(f"\n{TextColor.GREEN}Account:\t{TextColor.RESET}{x[0]}\n \
+                      {TextColor.GREEN}OTP Secret Key:\t{TextColor.RESET}{x[1]}\n \
+                      {TextColor.GREEN}OTP QR URI:\t{TextColor.RESET}{x[2]}")
 
     return None
 
@@ -251,7 +252,7 @@ def main():
 
     # Handle first time users who don't have a Fernet encryption / decreption key
     else:
-        question = input(f"You don't have a Fernet.key file or FERNET environment variable and didn't supply a Fernet\nencryption key with the --key option. Would you like to generate a Fernet key? ")
+        question = input(f"You don't have a fernet.key file or FERNET environment variable and didn't supply a Fernet\nencryption key with the --key option. Would you like to generate a Fernet key? ")
         if question.lower() == 'y':
             question2 = input(f"\nWould you like your key saved to a file and automatically loaded when this application\nis run, or printed out so you can put it somewhere safer and supply it with the\n--key option or as a FERNET environment variable (file | print)? ")
             if question2.lower() == 'print':
@@ -260,11 +261,11 @@ def main():
                 with open('fernet.key', 'w') as f:
                     key = Fernet.generate_key().decode()
                     f.write(key)
-                    print(f"Your key {TextColor.BLOGR}{key}{TextColor.RESET} was saved as ./Fernet.key. It will be automatically used in the future.")
+                    print(f"Your key {TextColor.BLOGR}{key}{TextColor.RESET} was saved as ./fernet.key. It will be automatically used in the future.")
             else:
                 print('\nSorry, not a valid response.')
         else:
-            print('\nPlease supply your Fernet key using the --key option, set it as an environment\nvariable called FERNETKEY, or store it in a file called ./Fernet.key for automatic use.')
+            print('\nPlease supply your Fernet key using the --key option, set it as an environment\nvariable called FERNETKEY, or store it in a file called ./fernet.key for automatic use.')
 
 
 if __name__ == '__main__':
