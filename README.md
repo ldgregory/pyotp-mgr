@@ -1,12 +1,7 @@
-# pyotp-mgr
-Leif Gregory <leif@devtek.org>
-totp.py v1.0
-Tested to Python v3.7.3
+# pyotp-mgr v1.0
 
 Description:
-Generate and display QR codes for TOTP while also saving them in encrypted
-format to a file (default) or DB (optional). This application acts as a TOTP
-key manager similar to a password manager such as KeePass etc.
+Generate and display QR codes for TOTP while also saving them in encrypted format to a file (default) or DB (optional). This application acts as a TOTP key manager similar to a password manager such as KeePass etc. The rebuild function will generate QR codes for every stored TOTP code allowing you to quickly scan them one after the other with your mobile TOTP app.
 
 Functions provided:
 - Generate TOTP Secret Key
