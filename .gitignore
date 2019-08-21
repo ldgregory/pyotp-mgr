@@ -1,0 +1,13 @@
+.flake8
+bin
+DC505\ TOTP.jpg
+include
+lib
+lib64
+otp.s3db
+__pycache__
+pyvenv.cfg
+share
+totp.txt
+totp-basic.py
+xfernet.key
