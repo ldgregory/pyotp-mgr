@@ -2,7 +2,7 @@
 
 """
 Leif Gregory <leif@devtek.org>
-totp.py v1.0
+totp.py v1.1
 Tested to Python v3.7.3
 
 ## Description:
